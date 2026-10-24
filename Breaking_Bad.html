@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 140px;
+            height: 140px;
+        }
+
+        .row {
+            display: flex;
+        }
+        .personne{
+            margin: 10px 12px;
+            text-align: center;
+            width: 140px;
+            border:  2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Les Nom :</h1>
+    <div id="Personnes"></div>
+
+    <script>
+        async function getData() {
+
+            const reponse = await fetch("https://www.breakingbadapi.com/api/characters");
+            const data = await reponse.json()
+            let k = 0;
+            console.log(data)
+            for (let i = 0; i < 100.; i++) {
+                let div_1 = document.createElement("div");
+                div_1.setAttribute("class","row")
+                for (let j = 0; j <8 ; j++) {
+                    let div_2 = document.createElement("div");
+                    div_2.setAttribute("class","personne")
+                    let img = document.createElement("img");
+
+                    img.setAttribute('src', data[k].img)
+                    img.setAttribute("alt", data[k].name)
+                    div_2.appendChild(img)
+                    let text = document.createElement("p");
+                    text.textContent = (k + 1) + '  -  ' + data[k].name;
+                    div_2.appendChild(text);
+                    div_1.appendChild(div_2)
+                    k++;
+                }
+                // document.getElementById("Personnes").appendChild(div_1)
+                console.log(data)
+            }}
+            getData()
+    </script>
+</body>
+
+</html>
